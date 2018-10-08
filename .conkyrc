@@ -1,0 +1,89 @@
+
+## This config was compiled from multiple sources by @Andril to fit perfectly for Solus OS (https://solus-project.com/download/)
+## Enjoy! :)
+ 
+background no
+font IBM 3270 Narrow:size=10
+use_xft yes
+xftalpha 1.0
+update_interval 2.0
+total_run_times 0
+own_window yes
+own_window_argb_visual yes
+own_window_argb_value 55
+own_window_type desktop
+own_window_transparent no
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+double_buffer yes
+minimum_size 500 5
+maximum_width 500
+draw_shades yes
+draw_outline no
+draw_borders no
+draw_graph_borders yes
+default_color white
+default_shade_color black
+default_outline_color green
+alignment top_right
+gap_x 24
+gap_y 65
+no_buffers yes
+uppercase no
+cpu_avg_samples 1
+override_utf8_locale yes
+border_inner_margin 10
+
+# Default colors and also border colors
+default_color white
+own_window_colour 111111
+color1 a4a4a4
+color2 849A00
+color3 9CFC4D
+color4 E3D1A4
+color5 CC2222
+
+
+TEXT
+${font IBM 3270 Narrow:size=10}${color grey} SYSTEM ${hr 3}${color}
+
+Hostname: $alignr $nodename
+OS: $alignr ${execi 1000 . /etc/os-release && echo $VERSION }
+Kernel: $alignr$kernel
+Uptime: $alignr$uptime
+Temp: ${alignr}${acpitemp} °C
+
+ 
+${color grey} HARDWARE ${hr 1}${color}
+CPU: ${execi 1000 cat /proc/cpuinfo | grep 'model name' | uniq | cut -c 32-46} ${freq} MHz 
+
+[0] ${cpu cpu1}% ${goto 150} ${cpugraph cpu1 24,330}
+[1] ${cpu cpu2}% ${goto 150} ${cpugraph cpu2 24,330}
+[2] ${cpu cpu3}% ${goto 150} ${cpugraph cpu3 24,330}
+[3] ${cpu cpu4}% ${goto 150} ${cpugraph cpu4 24,330}
+[4] ${cpu cpu5}% ${goto 150} ${cpugraph cpu5 24,330}
+[5] ${cpu cpu6}% ${goto 150} ${cpugraph cpu6 24,330}
+[6] ${cpu cpu7}% ${goto 150} ${cpugraph cpu7 24,330}
+[7] ${cpu cpu8}% ${goto 150} ${cpugraph cpu8 24,330}
+ 
+Ram ${alignr }$mem / $memmax ($memperc%)
+${membar 8}
+Swap ${alignr}$swap / $swapmax ($swapperc%)
+${swapbar 8}
+ 
+${color grey} PROCESSES ${hr 1}${color}
+Processes: ${alignr}$processes ($running_processes running)
+
+Highest CPU ${goto 300}  CPU% ${goto 375}  MEM%
+${top name 1} ${goto 300}${top cpu 1} ${goto 375}${top mem 1}
+${top name 2} ${goto 300}${top cpu 2} ${goto 375}${top mem 2}
+${top name 3} ${goto 300}${top cpu 3} ${goto 375}${top mem 3}
+ 
+${color grey} IO ${hr 1}${color}
+ 
+/ ${alignr} ${fs_used /} / ${fs_size /}
+swap ${alignr} ${swap} / ${swapmax}
+ 
+Down    ${goto 80}${totaldown wlo1} ${goto 200} ${downspeed wlo1}/s
+${goto 80}${downspeedgraph wlo1 25,400 789E2D A7CC5C}
+Up      ${goto 80}${totalup wlo1}   ${goto 200} ${upspeed wl01}/s
+${goto 80}${upspeedgraph wlo1 25,400 789E2D A7CC5C}
